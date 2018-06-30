@@ -49,33 +49,6 @@ public class Solution {
 
 // Professional solution
 //
-public class SelectionSort {
-  public int[] selectionSort(int[] array) {
-    // check null before any other things.
-    // check other conditions: empty array... etc.
-    if (array == null || array.length <= 1) {
-      return array;
-    }    
-    
-    for (int i = 0; i < array.length - 1; i++) {
-      int min = i;
-      
-      // find the min element in the subarray of (i, array.length - 1)
-      for (int j = i + 1; j < array.length; j++) {
-        if (array[j] < array[min]) {
-          min = j;
-        }
-      }
-      swap(array, i, min);
-    }    
-    return array;
-  } 
-  
-  private void swap(int[] nums, int a, int b) {
-    int temp = nums[a];
-    nums[a] = nums[b];
-    nums[b] = temp;
-  }
-}
+https://docs.google.com/document/d/1FqVLq6Pu6FMr0cObsjUskr7MNLVZfCiTKOrbrTaB0ko/edit#heading=h.gcb1mgn374xd
 
 
