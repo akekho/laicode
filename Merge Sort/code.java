@@ -79,6 +79,6 @@ public class Solution {
 
 // Professional solution
 //
-https://docs.google.com/document/d/1FqVLq6Pu6FMr0cObsjUskr7MNLVZfCiTKOrbrTaB0ko/edit#heading=h.gcb1mgn374xd
+https://docs.google.com/document/d/1FqVLq6Pu6FMr0cObsjUskr7MNLVZfCiTKOrbrTaB0ko/edit#heading=h.9yd6tekbhfs2
 
 
