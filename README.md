@@ -1,3 +1,0 @@
-# Laicode
-# Laicode
-# Laicode
