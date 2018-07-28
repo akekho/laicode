@@ -42,7 +42,7 @@ public class Solution {
                               public int compare (Map.Entry<String, Integer> entry1, 
                                                   Map.Entry<String, Integer> entry2) {
                                 if (entry1.getValue() == entry2.getValue()) {
-                                  return 0;
+                                  return -entry1.getKey().compareTo(entry2.getKey());
                                 }
                                 
                                 return entry1.getValue() < entry2.getValue() ? -1 : 1;
@@ -50,14 +50,9 @@ public class Solution {
                             });
     
     for (Map.Entry<String, Integer> entry : hashmap.entrySet()) {
-      if (minheap.size() < k) {
-        minheap.offer(entry);
-      }
-      else {
-        if (minheap.peek().getValue() < entry.getValue()) {
-          minheap.poll();
-          minheap.offer(entry);
-        }
+      minheap.offer(entry);
+      if (minheap.size() > k) {
+        minheap.poll();
       }
     }
     
@@ -73,6 +68,7 @@ public class Solution {
     }
   }
 }
+
 
 
 
