@@ -24,11 +24,19 @@
  *   }
  * }
  */
+
+// Time complexity: O(n) n是number of nodes
+// Space complexity: O(height of tree) recursion tree层数为height of tree，每层操作为O(1)
+// complete或balanced binary tree时空间复杂度才是O(logn)
+// complete属于balanced
+// complete：只有最后一层有气泡且气泡在左侧
+// balanced：左右子树高度差不超过1
 public class Solution {
   public boolean isBST(TreeNode root) {
     return BST_helper(root, Integer.MAX_VALUE, Integer.MIN_VALUE);
   }
   
+  // max和min是boundary，root的范围是[min, max]，所以最后recusion调用要+1 -1
   private boolean BST_helper(TreeNode root, int max, int min) {
     if (root == null) {
       return true;
@@ -37,7 +45,7 @@ public class Solution {
     if (root.key < min || root.key > max) {
       return false;
     }
-    
+        
     return BST_helper(root.left, root.key - 1, min) && BST_helper(root.right, max, root.key + 1);
   }
 }
