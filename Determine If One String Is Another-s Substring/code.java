@@ -23,6 +23,8 @@
 
 // Naive solution
 //
+// Time complexity: O(m * n)
+// Space complexity: O(1)
   public int strstr(String large, String small) {
     if (small.isEmpty()) {
       return 0;
@@ -59,5 +61,6 @@
 // Professional solution
 //
 https://docs.google.com/document/d/1FqVLq6Pu6FMr0cObsjUskr7MNLVZfCiTKOrbrTaB0ko/edit#heading=h.hlcsrjrmaqg
+
 
 
