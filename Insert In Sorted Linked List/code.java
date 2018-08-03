@@ -50,6 +50,8 @@ public class Solution {
 
 // Recursive solution
 //
+//Recursive解法中，小一号的问题是在除去头节点的剩下节点中插入，backtracking时将头节点和剩下部分组合起来
+//
   public ListNode insert(ListNode head, int target) {
     ListNode newNode = new ListNode(target);
     return insertNode(head, newNode);  
@@ -60,14 +62,17 @@ public class Solution {
       return target;
     }
     
-	   if (head.value >= target.value) {
-		    target.next = head;
-		    return target;
-  	 }
-	   else {
-		    head.next = insertNode(head.next, target);
+    if (head.value >= target.value) {
+      target.next = head;
+      // target插入到head前面，target作为新的head返回	    
+      return target;
+    }
+    else {
+      //第一个head.next是用来连接头节点和小一号问题的，
+      //第二个head.next是recursive小一号问题的头节点  
+      head.next = insertNode(head.next, target);
       return head;
-	   }      
+    }      
   }
 
 
