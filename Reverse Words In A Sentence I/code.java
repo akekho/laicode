@@ -29,9 +29,11 @@ public class Solution {
     
     int space = 0;
     for (int i = 0; i < charArray.length; i++) {
+      // 待翻转单词的第一个字母
       if (charArray[i] != ' ' && (i == 0 || charArray[i - 1] == ' ')) {
         space = i;
       }
+      // 待翻转单词的最后一个字母
       if (charArray[i] != ' ' && (i == charArray.length - 1 || charArray[i + 1] == ' ')) {
         reverse(charArray, space, i);
       }
