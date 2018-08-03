@@ -22,6 +22,9 @@
  *   }
  * }
  */
+
+// Iterative solution
+//
 public class Solution {
   public ListNode insert(ListNode head, int value) {
     ListNode newNode = new ListNode(value);
@@ -45,11 +48,34 @@ public class Solution {
   }
 }
 
+// Recursive solution
+//
+  public ListNode insert(ListNode head, int target) {
+    ListNode newNode = new ListNode(target);
+    return insertNode(head, newNode);  
+  }
+  
+  private ListNode insertNode(ListNode head, ListNode target) {
+    if (head == null) {
+      return target;
+    }
+    
+	   if (head.value >= target.value) {
+		    target.next = head;
+		    return target;
+  	 }
+	   else {
+		    head.next = insertNode(head.next, target);
+      return head;
+	   }      
+  }
+
 
 
 
 // Professional solution
 //
 https://docs.google.com/document/d/1FqVLq6Pu6FMr0cObsjUskr7MNLVZfCiTKOrbrTaB0ko/edit#heading=h.3c1bfnazb51f
+
 
 
