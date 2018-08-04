@@ -53,16 +53,26 @@ public class Solution {
     }
   }
   
+  // source长度大于target, 因此可以直接在charArray上进行操作，快慢指针复制
   private String replaceShorter(char[] input, String s, String t) {
     int slow = 0;
     int fast = 0;
     while (fast < input.length) {
+      // 判断从fast这个位置开始的substring能否匹配上s，如果能则从slow位置开始复制t
+      // 否则slow复制fast
+      //
+      // 这里fast <= input.length - s.length()对于while循环并没有作用
+      // 这个条件针对的是后面的equalSubstring，
+      // 如果没有这个条件则调用equalSubstring时会ArrayIndexOutOfBoundsException
       if (fast <= input.length - s.length() && equalSubstring(input, fast, s)) {
         copySubstring(input, slow, t);
+        
+        // 注意copySubstring之后slow和fast加上的长度不同
         slow += t.length();
         fast += s.length();
       }
       else {
+        // 匹配不上时slow复制fast
         input[slow++] = input[fast++];
       }
     }
@@ -70,6 +80,9 @@ public class Solution {
     return new String(input, 0, slow);   
   }
   
+  // 用一个arraylist存储所有能match上的位置
+  // 每一次match就意味着新的charArray的长度要增加t.length() - s.length()
+  // 最后slow和fast从后往前移动完成复制
   private String replaceLonger(char[] input, String s, String t) {
     ArrayList<Integer> matches = getAllMatches(input, s);
     
@@ -94,6 +107,7 @@ public class Solution {
     return new String(result);
   }
   
+  // 判断从fromIndex这个位置开始的substring是否和s相同
   private boolean equalSubstring(char[] input, int fromIndex, String s) {
     for (int i = 0; i < s.length(); i++) {
       if (input[fromIndex + i] != s.charAt(i)) {
@@ -103,19 +117,22 @@ public class Solution {
     return true;
   }
   
+  // 从fromIndex这个位置开始把t复制到result里
   private void copySubstring(char[] result, int fromIndex, String t) {
     for (int i = 0; i < t.length(); i++) {
       result[fromIndex + i] = t.charAt(i);
     }
   }
   
+  // 找到input中所有能匹配上s的位置，每次存储匹配的末尾index进arraylist，方便repalceLonger操作
   private ArrayList<Integer> getAllMatches(char[] input, String s) {
-    ArrayList<Integer> matches = new ArrayList<>();
-    
+    ArrayList<Integer> matches = new ArrayList<>();    
     int i = 0; 
     
     while (i <= input.length - s.length()) {
       if (equalSubstring(input, i, s)) {
+        // we record the match substring's end index instead of start index, 
+        // for later convenience
         matches.add(i + s.length() - 1);
         i += s.length();
       }
