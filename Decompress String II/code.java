@@ -121,5 +121,80 @@ public class Solution {
 
 
 
+// another version
+//
+public class Solution {
+    public String decompress(String input) {
+        if (input.isEmpty()) {
+            return input;
+        }
+
+        char[] charArray = input.toCharArray();
+
+        return decodeLong(charArray, decodeShort(charArray));
+    }
+
+    private int decodeShort(char[] charArray) {
+        int end = 0;
+
+        for (int i = 0; i < charArray.length; i += 2) {
+            int digit = getNumber(charArray[i + 1]);
+
+            if (digit >= 0 && digit <= 2) {
+                for (int j = 0; j < digit; j++) {
+                    charArray[end++] = charArray[i];
+                }
+            }
+            else {
+                charArray[end++] = charArray[i];
+                charArray[end++] = charArray[i + 1];
+            }
+        }
+
+        return end;
+    }
+
+    private String decodeLong(char[] charArray, int length) {
+        int newLength = length;
+
+        for (int i = 0; i < length; i++) {
+            int digit = getNumber(charArray[i]);
+            if (digit > 2 && digit <= 9) {
+                newLength += digit - 2;
+            }
+        }
+
+        char[] result = new char[newLength];
+        int end = newLength - 1;
+
+        for (int i = length - 1; i >= 0; i--) {
+            int digit = getNumber(charArray[i]);
+            if (digit > 2 && digit <= 9) {
+                i--;
+                for (int j = 0; j < digit; j++) {
+                    result[end--] = charArray[i];
+                }
+            }
+            else {
+                result[end--] = charArray[i];
+            }
+        }
+
+        return new String(result);
+    }
+
+    private int getNumber(char digit) {
+        return digit - '0';
+    }
+}
+
+
+
+
+
 // Professional solution
 //
+https://docs.google.com/document/d/1FqVLq6Pu6FMr0cObsjUskr7MNLVZfCiTKOrbrTaB0ko/edit#heading=h.1nbrfxx5wzw9
+
+
+
