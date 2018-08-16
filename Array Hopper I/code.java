@@ -14,6 +14,7 @@
 
 // My solution
 //
+// DP: from end to start
 public class Solution {
   public boolean canJump(int[] array) {
     if (array.length == 1) {
@@ -41,7 +42,8 @@ public class Solution {
 }
 
 
-// DP Version 2
+// DP: from end to start
+// Version 2
 public class Solution {
   public boolean canJump(int[] array) {
     boolean[] DP = new boolean[array.length];
@@ -53,6 +55,29 @@ public class Solution {
       }
     }
     return DP[0];
+  }
+}
+
+
+// DP: from start to end
+public class Solution {
+  public boolean canJump(int[] array) {
+    if (array.length == 1) {
+      return true;
+    }
+
+    boolean[] DP = new boolean[array.length];
+    DP[0] = true;
+    
+    for (int i = 1; i < array.length; i++) {
+      for (int j = 0; j < i; j++) {
+        if (DP[j] && array[j] + j >= i) {
+          DP[i] = true;
+          break;
+        }
+      }
+    }
+    return DP[array.length - 1];
   }
 }
 
