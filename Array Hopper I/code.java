@@ -16,6 +16,34 @@
 //
 public class Solution {
   public boolean canJump(int[] array) {
+    if (array.length == 1) {
+      return true;
+    }
+    
+    boolean[] DP = new boolean[array.length];
+    DP[array.length - 1] = true;
+      
+    for (int i = array.length - 2; i >= 0; i--) {
+      if (i + array[i] >= array.length - 1) {
+        DP[i] = true;
+      }
+      else {
+        for (int j = i + 1; j <= i + array[i]; j++) {
+          if (DP[j]) {
+            DP[i] = true;
+            break;
+          }
+        }
+      }
+    }
+    return DP[0];
+  }
+}
+
+
+// DP Version 2
+public class Solution {
+  public boolean canJump(int[] array) {
     boolean[] DP = new boolean[array.length];
     DP[array.length - 1] = true;
       
