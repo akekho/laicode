@@ -28,9 +28,9 @@ public class Solution {
     for (GraphNode node : graph) {
       if (!hashmap.containsKey(node)) {
         hashmap.put(node, new GraphNode(node.key));
-        BFS(node, hashmap);
-        // you can use DFS instead:
-        // DFS(node, hashmap);
+        DFS(node, hashmap);
+        // you can use BFS instead, but DFS is recommended:
+        // BFS(node, hashmap);
       }
     }
     return new ArrayList<GraphNode>(hashmap.values());
