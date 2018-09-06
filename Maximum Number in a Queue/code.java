@@ -12,13 +12,13 @@
 // My solution
 //
 class Solution {
-	public int maxInQueue(Queue<Integer> queue) {
+  public int maxInQueue(Queue<Integer> queue) {
     int max = Integer.MIN_VALUE;
     for (int num : queue) {
       max = Math.max(max, num);
     }
     return max;
-	}
+  }
 }
 
 
