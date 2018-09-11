@@ -48,7 +48,7 @@
 public class Solution {
   public int maxPathSum(TreeNode root) {
     int[] DP = {Integer.MIN_VALUE};
-    getMax(root, DP, Integer.MIN_VALUE);
+    getMax(root, DP, 0);
     return DP[0];
   } 
   
@@ -56,14 +56,8 @@ public class Solution {
     if (root == null) {
       return;
     }
-    
-    if (sum < 0) {
-      sum = root.key;
-    }
-    else {
-      sum += root.key;
-    }
-    
+        
+    sum = Math.max(root.key, root.key + sum);
     DP[0] = Math.max(DP[0], sum);
     getMax(root.left, DP, sum);
     getMax(root.right, DP, sum);    
