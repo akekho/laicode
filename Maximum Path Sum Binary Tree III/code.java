@@ -46,22 +46,42 @@
  * }
  */
 public class Solution {
+  // 三步曲: max subarray sum from bottom to top
   public int maxPathSum(TreeNode root) {
-    int[] DP = {Integer.MIN_VALUE};
-    getMax(root, DP, 0);
-    return DP[0];
-  } 
-  
-  private void getMax(TreeNode root, int[] DP, int sum) {
-    if (root == null) {
-      return;
-    }
-        
-    sum = Math.max(root.key, root.key + sum);
-    DP[0] = Math.max(DP[0], sum);
-    getMax(root.left, DP, sum);
-    getMax(root.right, DP, sum);    
+    int[] max = new int[] {Integer.MIN_VALUE};
+    getMax(root, max);
+    return max[0];
   }
+
+  private int getMax(TreeNode root, int[] max) {
+    if (root == null) {
+      return 0;
+    }
+    
+    int left = getMax(root.left, max);
+    int right = getMax(root.right, max);    
+    int temp = Math.max(0, Math.max(left, right)) + root.key;
+    max[0] = Math.max(max[0], temp);
+    return temp;
+  }
+  
+//    DP + Recursion: max subarray sum from top to bottom
+//    public int maxPathSum(TreeNode root) {
+//        int[] DP = {Integer.MIN_VALUE};
+//        getMax(root, DP, 0);
+//        return DP[0];
+//    }
+//
+//    private void getMax(TreeNode root, int[] DP, int sum) {
+//        if (root == null) {
+//            return;
+//        }
+//
+//        sum = Math.max(root.key, root.key + sum);
+//        DP[0] = Math.max(DP[0], sum);
+//        getMax(root.left, DP, sum);
+//        getMax(root.right, DP, sum);
+//    }
 }
 
 
